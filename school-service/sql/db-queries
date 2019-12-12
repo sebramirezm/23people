@@ -1,0 +1,16 @@
+CREATE TABLE Classes (classId int, className varchar(40), primary key(classId));
+CREATE TABLE Students (studentId INT, fisrtName VARCHAR(30), lastName VARCHAR(30), age INT, classId INT, foreign key (classId) references Classes(classId));
+
+INSERT INTO Classes (classId, className) VALUES ( 1, 'Mathematics');
+INSERT INTO Classes (classId, className) VALUES ( 2, 'Idioms');
+INSERT INTO Classes (classId, className) VALUES ( 3, 'Coding');
+INSERT INTO Classes (classId, className) VALUES ( 4, 'Algorithms');
+
+INSERT INTO Students VALUES (1,'Dario','Toro',18,3);
+INSERT INTO Students VALUES (2,'Eduardo','Pichardo',22,3);
+INSERT INTO Students VALUES (3,'Nicolas','Fernandez',21,3);
+INSERT INTO Students VALUES (4,'Jose','Mura',19,4);
+INSERT INTO Students VALUES (5,'Franco','Guajardo',22,1);
+INSERT INTO Students VALUES (6,'Javier','Mella',28,2);
+
+commit;
