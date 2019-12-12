@@ -1,8 +1,14 @@
 package com.people.workshop.schoolservice.models;
 
+import org.springframework.data.annotation.Id;
+
+@Entity
 public class Student {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int studentId;
+
     private String firstName;
     private String lastName;
     private int classId;
