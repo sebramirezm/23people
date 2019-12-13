@@ -12,11 +12,13 @@ import java.util.Optional;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    public StudentServiceImpl(StudentRepository studentRepository) {this.studentRepository = studentRepository;}
+
     @Override
-    public Optional<Student> findById(int id) {
+    public Optional<Student> findByStudentId(int id) {
         return studentRepository.findById(id);
     }
 

@@ -13,10 +13,14 @@ import java.util.List;
 @RequestMapping(path="/students")
 public class StudentController {
 
-    @Autowired
     private StudentService studentService;
 
-    @RequestMapping(value="/all", method = RequestMethod.GET)
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @RequestMapping(value="/all", method = RequestMethod.GET)//acotar a getMapping
     public List<Student> findAll(){
         return studentService.findAll();
     }

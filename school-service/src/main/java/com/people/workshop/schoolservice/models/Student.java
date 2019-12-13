@@ -10,20 +10,20 @@ import javax.persistence.GenerationType;
 @Table(name = "Students")
 public class Student {
 
-    private int studentid;
+    private int id;
     private String firstname;
     private String lastname;
     private int age;
-    private int classid;
+    private int courseid;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getStudentid() {
-        return studentid;
+    public int getId() {
+        return id;
     }
 
-    public void setStudentid(int studentid) {
-        this.studentid = studentid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstname() {
@@ -46,11 +46,11 @@ public class Student {
 
     public void setAge(int age) { this.age = age; }
 
-    public int getClassid() {
-        return classid;
+    public int getCourseid() {
+        return courseid;
     }
 
-    public void setClassid(int classid) {
-        this.classid = classid;
+    public void setCourseid(int courseid) {
+        this.courseid = courseid;
     }
 }

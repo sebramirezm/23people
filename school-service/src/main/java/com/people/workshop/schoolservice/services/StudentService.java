@@ -9,6 +9,6 @@ public interface StudentService {
 
     List <Student> findAll();
     void save(Student student);
-    Optional <Student> findById(int id);
+    Optional <Student> findByStudentId(int id);
     void delete(int id);
 }
