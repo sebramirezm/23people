@@ -1,20 +1,25 @@
 package com.people.workshop.schoolservice.models;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "Courses")
 public class Course {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Size(max = 40)
+    @NotEmpty
     private String name;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @OneToMany(mappedBy = "Courses", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    private List<Student> students;
+
     public int getId() {return id;}
 
     public void setId(int id) {
@@ -25,7 +30,9 @@ public class Course {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void setName(String name) {this.name = name;}
+
+    public List<Student> getStudents() {return students;}
+
+    public void setStudents(List<Student> students) {this.students = students;}
 }

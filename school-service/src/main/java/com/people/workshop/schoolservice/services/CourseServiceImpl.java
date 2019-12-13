@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.people.workshop.schoolservice.models.Course;
 import com.people.workshop.schoolservice.repositories.CourseRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void save(Course course) { courseRepository.save(course); }
+    public void addCourse(ArrayList<Course> courses) { courseRepository.saveAll(courses);}
 
     @Override
     public List<Course> findAll() {

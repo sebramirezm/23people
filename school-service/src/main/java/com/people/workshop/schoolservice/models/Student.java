@@ -1,23 +1,32 @@
 package com.people.workshop.schoolservice.models;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Students")
 public class Student {
 
-    private int id;
-    private String firstname;
-    private String lastname;
-    private int age;
-    private int courseid;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
+    @Max(30)
+    @NotEmpty
+    private String firstname;
+
+    @Max(30)
+    @NotEmpty
+    private String lastname;
+
+    @NotEmpty
+    private int age;
+
+    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name="courseid")
+    private Course course;
+
     public int getId() {
         return id;
     }
@@ -46,11 +55,7 @@ public class Student {
 
     public void setAge(int age) { this.age = age; }
 
-    public int getCourseid() {
-        return courseid;
-    }
+    public Course getCourse() {return course;}
 
-    public void setCourseid(int courseid) {
-        this.courseid = courseid;
-    }
+    public void setCourse(Course course) {this.course = course;}
 }
