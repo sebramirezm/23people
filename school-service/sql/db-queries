@@ -1,7 +1,7 @@
 CREATE SCHEMA 'schoolapp' ;
 
 CREATE TABLE Classes (classId int, className varchar(40), primary key(classId));
-CREATE TABLE Students (studentId INT, fisrtName VARCHAR(30), lastName VARCHAR(30), age INT, classId INT, foreign key (classId) references Classes(classId));
+CREATE TABLE Students (studentId INT, firstName VARCHAR(30), lastName VARCHAR(30), age INT, classId INT, foreign key (classId) references Classes(classId));
 
 INSERT INTO Classes (classId, className) VALUES ( 1, 'Mathematics');
 INSERT INTO Classes (classId, className) VALUES ( 2, 'Idioms');

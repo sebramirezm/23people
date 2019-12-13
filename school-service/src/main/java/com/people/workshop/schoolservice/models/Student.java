@@ -1,51 +1,56 @@
 package com.people.workshop.schoolservice.models;
 
-
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
+@Table(name = "Students")
 public class Student {
 
+    private int studentid;
+    private String firstname;
+    private String lastname;
+    private int age;
+    private int classid;
+
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int studentId;
-
-    private String firstName;
-    private String lastName;
-    private int classId;
-
-    public int getStudentId() {
-        return studentId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int getStudentid() {
+        return studentid;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public void setStudentid(int studentid) {
+        this.studentid = studentid;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public int getClassId() {
-        return classId;
+    public int getAge() { return age; }
+
+    public void setAge(int age) { this.age = age; }
+
+    public int getClassid() {
+        return classid;
     }
 
-    public void setClassId(int classId) {
-        this.classId = classId;
+    public void setClassid(int classid) {
+        this.classid = classid;
     }
 }
