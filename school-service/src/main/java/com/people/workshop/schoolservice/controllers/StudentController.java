@@ -1,12 +1,13 @@
 package com.people.workshop.schoolservice.controllers;
 
+import com.people.workshop.schoolservice.models.Course;
 import com.people.workshop.schoolservice.models.Student;
 import com.people.workshop.schoolservice.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,4 +24,9 @@ public class StudentController {
         return studentService.findAll();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public void createStudent(@Valid @RequestBody List<Student> students) {
+        studentService.addStudent(students);
+    }
 }

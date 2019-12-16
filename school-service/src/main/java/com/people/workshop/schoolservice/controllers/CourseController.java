@@ -1,7 +1,6 @@
 package com.people.workshop.schoolservice.controllers;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ public class CourseController {
 
     private CourseService courseService;
 
-    @Autowired
     public CourseController(CourseService courseService) {this.courseService = courseService;}
 
     @GetMapping(value="/all")
@@ -25,7 +23,10 @@ public class CourseController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createCourse(@Valid @RequestBody ArrayList<Course> courses){
-        courseService.addCourse(courses);
+    public void createCourse(@Valid @RequestBody List<Course> course){courseService.addCourse(course);}
+
+    @PutMapping("/{id}")
+    public String updateCourse(@Valid @PathVariable int id, @RequestBody List<Course> course){
+        return courseService.editCourse(id, course);
     }
 }

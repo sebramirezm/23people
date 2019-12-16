@@ -1,12 +1,14 @@
 package com.people.workshop.schoolservice.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "Courses")
+@Table(name = "courses")
 public class Course {
 
     @Id
@@ -17,7 +19,8 @@ public class Course {
     @NotEmpty
     private String name;
 
-    @OneToMany(mappedBy = "Courses", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonBackReference
+    @OneToMany(mappedBy = "course", cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Student> students;
 
     public int getId() {return id;}

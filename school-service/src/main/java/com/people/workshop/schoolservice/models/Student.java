@@ -1,5 +1,7 @@
 package com.people.workshop.schoolservice.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
@@ -9,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Max(30)
@@ -23,37 +25,26 @@ public class Student {
     @NotEmpty
     private int age;
 
-    @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JsonBackReference
+    @ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name="courseid")
     private Course course;
 
-    public int getId() {
-        return id;
-    }
+    public int getId() {return id;}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) {this.id = id;}
 
-    public String getFirstname() {
-        return firstname;
-    }
+    public String getFirstname() {return firstname;}
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
+    public void setFirstname(String firstname) {this.firstname = firstname;}
 
-    public String getLastname() {
-        return lastname;
-    }
+    public String getLastname() {return lastname;}
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
+    public void setLastname(String lastname) {this.lastname = lastname;}
 
-    public int getAge() { return age; }
+    public int getAge() {return age;}
 
-    public void setAge(int age) { this.age = age; }
+    public void setAge(int age) {this.age = age;}
 
     public Course getCourse() {return course;}
 

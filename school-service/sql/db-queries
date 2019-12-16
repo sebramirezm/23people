@@ -1,6 +1,6 @@
 CREATE SCHEMA 'schoolapp' ;
 
-CREATE TABLE Courses (id int NOT NULL, name varchar(40) , primary key(id), UNIQUE KEY 'UNIQUE_COURSE' ('name'));
+CREATE TABLE Courses (id int NOT NULL, name varchar(40) , primary key(id));
 CREATE TABLE Students (id INT NOT NULL, firstName VARCHAR(30), lastName VARCHAR(30), age INT, courseid INT, foreign key (courseid) references Courses(id));
 
 INSERT INTO Courses VALUES ( 1, 'Mathematics');
