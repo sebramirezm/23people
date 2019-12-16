@@ -1,15 +1,15 @@
 package com.people.workshop.schoolservice.services;
 
 import java.util.List;
-import java.util.Optional;
-
 import com.people.workshop.schoolservice.models.Course;
+import org.springframework.data.domain.Pageable;
 
 public interface CourseService {
 
     List<Course> findAll();
-    Optional<Course> findById(int id);
-    void addCourse(List<Course> courses);
-    String editCourse(int id, List<Course> courses);
+    List<Course> orderedCourses(Pageable paging);
+    Course findById(int id);
+    void add(List<Course> courses);
+    String edit(int id, Course course);
     void delete(int id);
 }

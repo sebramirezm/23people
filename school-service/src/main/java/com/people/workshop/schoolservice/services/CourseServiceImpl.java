@@ -1,14 +1,16 @@
 package com.people.workshop.schoolservice.services;
 
+import com.people.workshop.schoolservice.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 
 import com.people.workshop.schoolservice.models.Course;
 import com.people.workshop.schoolservice.repositories.CourseRepository;
 
-import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -22,21 +24,37 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> findAll() {return courseRepository.findAll();}
 
     @Override
-    public Optional<Course> findById(int id) {return courseRepository.findById(id);}
+    public List<Course> orderedCourses(Pageable paging){
+        Page<Course> pageResult = courseRepository.findAll(paging);
 
-    @Override
-    public void addCourse(List<Course> courses) {courseRepository.saveAll(courses);}
-
-    @Override
-    public String editCourse(int id, List<Course> courses) throws EntityNotFoundException {
-        if (!courseRepository.findById(id).isPresent()){
-            throw new EntityNotFoundException("Course not found");
+        if(pageResult.hasContent()) {
+            return pageResult.getContent();
+        } else {
+            return new ArrayList<Course>();
         }
-        courses.setId(id);
-        courseRepository.saveAll(courses);
-        return "updated course with id: " + id;
     }
 
     @Override
-    public void delete(int id) {courseRepository.deleteById(id);}
+    public Course findById(int id) {
+        return courseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Course Doesn't Exist"));}
+
+    @Override
+    public void add(List<Course> courses) {courseRepository.saveAll(courses);}
+
+    @Override
+    public String edit(int id, Course course) throws EntityNotFoundException {
+        if (!courseRepository.findById(id).isPresent()){
+            throw new EntityNotFoundException("Course Doesn't Exist");}
+        course.setId(id);
+        courseRepository.save(course);
+        return "Course "+course.getName()+" edited successfully";
+    }
+
+    @Override
+    public void delete(int id) throws EntityNotFoundException {
+        if (!courseRepository.findById(id).isPresent()){
+            throw new EntityNotFoundException("Course Doesn't Exist");
+        }
+        courseRepository.deleteById(id);
+    }
 }
