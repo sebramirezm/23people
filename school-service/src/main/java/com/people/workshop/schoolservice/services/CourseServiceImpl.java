@@ -24,7 +24,7 @@ public class CourseServiceImpl implements CourseService {
     public List<Course> findAll() {return courseRepository.findAll();}
 
     @Override
-    public List<Course> orderedCourses(Pageable paging){
+    public List<Course> findByFormat(Pageable paging){
         Page<Course> pageResult = courseRepository.findAll(paging);
 
         if(pageResult.hasContent()) {
@@ -42,12 +42,12 @@ public class CourseServiceImpl implements CourseService {
     public void add(List<Course> courses) {courseRepository.saveAll(courses);}
 
     @Override
-    public String edit(int id, Course course) throws EntityNotFoundException {
+    public void edit(int id, Course course) throws EntityNotFoundException {
         if (!courseRepository.findById(id).isPresent()){
             throw new EntityNotFoundException("Course Doesn't Exist");}
         course.setId(id);
         courseRepository.save(course);
-        return "Course "+course.getName()+" edited successfully";
+        //return "Course "+course.getName()+" edited successfully";
     }
 
     @Override

@@ -7,9 +7,9 @@ import org.springframework.data.domain.Pageable;
 public interface CourseService {
 
     List<Course> findAll();
-    List<Course> orderedCourses(Pageable paging);
+    List<Course> findByFormat(Pageable paging);
     Course findById(int id);
     void add(List<Course> courses);
-    String edit(int id, Course course);
+    void edit(int id, Course course);
     void delete(int id);
 }

@@ -25,24 +25,24 @@ public class CourseController {
     public List<Course> findAll(){return courseService.findAll();}
 
     @GetMapping
-    public List<Course> getAllCourses(Pageable paging) {
-        return courseService.orderedCourses(paging);
+    public List<Course> findByFormat(Pageable paging) {
+        return courseService.findByFormat(paging);
     }
 
     @GetMapping("/{id}")
-    public Course getCourseById(@PathVariable @Min(1) int id){
+    public Course getById(@PathVariable @Min(1) int id){
         return courseService.findById(id);}
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createCourse(@Valid @RequestBody List<Course> course){courseService.add(course);}
+    public void add(@Valid @RequestBody List<Course> course){courseService.add(course);}
 
     @PutMapping("/{id}")
-    public String updateCourse(@Valid @PathVariable int id, @RequestBody Course course){
-        return courseService.edit(id, course);}
+    public void edit(@Valid @PathVariable int id, @RequestBody Course course){
+         courseService.edit(id, course);}
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void deleteCourse(@PathVariable int id){courseService.delete(id);
+    public void delete(@PathVariable int id){courseService.delete(id);
     }
 }
