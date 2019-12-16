@@ -1,13 +1,16 @@
 package com.people.workshop.schoolservice.services;
 
+import com.people.workshop.schoolservice.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 
 import com.people.workshop.schoolservice.models.Student;
 import com.people.workshop.schoolservice.repositories.StudentRepository;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -18,22 +21,43 @@ public class StudentServiceImpl implements StudentService {
     public StudentServiceImpl(StudentRepository studentRepository) {this.studentRepository = studentRepository;}
 
     @Override
-    public Optional<Student> findByStudentId(int id) {
-        return studentRepository.findById(id);
-    }
-
-    @Override
-    public void addStudent(List<Student> students) {
-        studentRepository.saveAll(students);
-    }
-
-    @Override
     public List<Student> findAll() {
         return studentRepository.findAll();
     }
 
     @Override
-    public void delete(int id) {
+    public List<Student> findByFormat(Pageable paging){
+        Page<Student> pageResult = studentRepository.findAll(paging);
+
+        if(pageResult.hasContent()) {
+            return pageResult.getContent();
+        } else {
+            return new ArrayList<Student>();
+        }
+    }
+    @Override
+    public Student findById(int id) {
+        return studentRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Student Doesn't Exist"));
+    }
+
+    @Override
+    public void add(List<Student> students) {
+        studentRepository.saveAll(students);
+    }
+
+    @Override
+    public void edit(int id, Student student) throws EntityNotFoundException {
+        if (!studentRepository.findById(id).isPresent()){
+            throw new EntityNotFoundException("Student Doesn't Exist");}
+        student.setId(id);
+        studentRepository.save(student);
+    }
+
+    @Override
+    public void delete(int id) throws EntityNotFoundException {
+        if (!studentRepository.findById(id).isPresent()){
+            throw new EntityNotFoundException("Student Doesn't Exist");
+        }
         studentRepository.deleteById(id);
     }
 

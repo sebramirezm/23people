@@ -30,19 +30,16 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public Course getById(@PathVariable @Min(1) int id){
-        return courseService.findById(id);}
+    public Course getById(@PathVariable @Min(1) int id){return courseService.findById(id);}
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public void add(@Valid @RequestBody List<Course> course){courseService.add(course);}
 
     @PutMapping("/{id}")
-    public void edit(@Valid @PathVariable int id, @RequestBody Course course){
-         courseService.edit(id, course);}
+    public void edit(@Valid @PathVariable int id, @RequestBody Course course){courseService.edit(id, course);}
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id){courseService.delete(id);
-    }
+    public void delete(@PathVariable int id){courseService.delete(id);}
 }
