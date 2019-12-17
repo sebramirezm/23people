@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "Students")
@@ -14,15 +16,15 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Max(30)
+    @Size(max=40)
     @NotEmpty
     private String firstname;
 
-    @Max(30)
+    @Size(max=40)
     @NotEmpty
     private String lastname;
 
-    @NotEmpty
+    @Min(1)
     private int age;
 
     @JsonBackReference
@@ -49,4 +51,6 @@ public class Student {
     public Course getCourse() {return course;}
 
     public void setCourse(Course course) {this.course = course;}
+
+    public String getCourseName(){return course.getName();}
 }

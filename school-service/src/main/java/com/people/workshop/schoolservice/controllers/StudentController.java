@@ -22,9 +22,7 @@ public class StudentController {
     public StudentController(GenericService<Student> studentService) {this.studentService = studentService;}
 
     @GetMapping(value="/all")
-    public List<Student> findAll(){
-        return studentService.findAll();
-    }
+    public List<Student> findAll(){return studentService.findAll(); }
 
     @GetMapping
     public List<Student> findByFormat(Pageable paging) {return studentService.findByFormat(paging); }

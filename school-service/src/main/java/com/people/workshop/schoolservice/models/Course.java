@@ -5,7 +5,10 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "courses")
@@ -38,4 +41,8 @@ public class Course {
     public List<Student> getStudents() {return students;}
 
     public void setStudents(List<Student> students) {this.students = students;}
+
+    public List<String> getStudentName(){
+        return students.stream().map(s -> s.getFirstname() + " " + s.getLastname()).collect(Collectors.toList());
+    }
 }
