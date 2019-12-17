@@ -1,7 +1,7 @@
 package com.people.workshop.schoolservice.controllers;
 
 import com.people.workshop.schoolservice.models.Student;
-import com.people.workshop.schoolservice.services.StudentService;
+import com.people.workshop.schoolservice.services.GenericService;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -17,9 +17,9 @@ import java.util.List;
 @RequestMapping(path="/students")
 public class StudentController {
 
-    private StudentService studentService;
+    private GenericService<Student> studentService;
 
-    public StudentController(StudentService studentService) {this.studentService = studentService;}
+    public StudentController(GenericService<Student> studentService) {this.studentService = studentService;}
 
     @GetMapping(value="/all")
     public List<Student> findAll(){

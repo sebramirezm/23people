@@ -4,12 +4,12 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 
+import com.people.workshop.schoolservice.services.GenericService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 
-import com.people.workshop.schoolservice.services.CourseService;
 import com.people.workshop.schoolservice.models.Course;
 
 @Validated
@@ -17,9 +17,9 @@ import com.people.workshop.schoolservice.models.Course;
 @RequestMapping(path="/courses")
 public class CourseController {
 
-    private CourseService courseService;
+    private GenericService<Course> courseService;
 
-    public CourseController(CourseService courseService) {this.courseService = courseService;}
+    public CourseController(GenericService<Course> courseService) {this.courseService = courseService;}
 
     @GetMapping(value="/all")
     public List<Course> findAll(){return courseService.findAll();}
