@@ -34,7 +34,7 @@ public class CourseController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void add(@Valid @RequestBody List<Course> course){courseService.add(course);}
+    public void add(@Valid @RequestBody Course course){courseService.add(course);}
 
     @PutMapping("/{id}")
     public void edit(@Valid @PathVariable int id, @RequestBody Course course){courseService.edit(id, course);}

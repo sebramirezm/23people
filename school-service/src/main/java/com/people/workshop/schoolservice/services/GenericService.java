@@ -9,7 +9,7 @@ public interface GenericService<T> {
     List<T> findAll();
     List<T> findByFormat(Pageable paging);
     T findById(int id);
-    void add(List<T> t);
+    void add(T t);
     void edit(int id, T t);
     void delete(int id);
 }

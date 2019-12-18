@@ -1,7 +1,6 @@
 package com.people.workshop.schoolservice.services;
 
 import com.people.workshop.schoolservice.exceptions.EntityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
@@ -17,7 +16,6 @@ public class StudentServiceImpl implements GenericService<Student> {
 
     private StudentRepository studentRepository;
 
-    @Autowired
     public StudentServiceImpl(StudentRepository studentRepository) {this.studentRepository = studentRepository;}
 
     @Override
@@ -41,9 +39,8 @@ public class StudentServiceImpl implements GenericService<Student> {
     }
 
     @Override
-    public void add(List<Student> students) {
-        studentRepository.saveAll(students);
-    }
+    public void add(Student student) {
+        studentRepository.save(student);}
 
     @Override
     public void edit(int id, Student student) throws EntityNotFoundException {

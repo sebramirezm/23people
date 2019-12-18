@@ -39,7 +39,7 @@ public class CourseServiceImpl implements GenericService<Course> {
         return courseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Course Doesn't Exist"));}
 
     @Override
-    public void add(List<Course> courses) {courseRepository.saveAll(courses);}
+    public void add(Course course) {courseRepository.save(course);}
 
     @Override
     public void edit(int id, Course course) throws EntityNotFoundException {
